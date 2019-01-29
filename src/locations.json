@@ -1,0 +1,47 @@
+[
+  {
+    "title": "wohnung",
+    "address": "wohnung",
+    "url": "google.com",
+    "position": {
+      "lat": 48.371620,
+      "lng": 10.883740
+    }
+  },
+  {
+    "title": "Dom",
+    "address": "dom",
+    "url": "google.com",
+    "position": {
+      "lat": 48.385120,
+      "lng": 10.903780
+    }
+  },
+  {
+    "title": "Theater",
+    "address": "theater",
+    "url": "google.com",
+    "position": {
+      "lat": 48.365990,
+      "lng": 10.893040
+    }
+  },
+  {
+    "title": "Rathausplatz",
+    "address": "rathausplatz",
+    "url": "google.com",
+    "position": {
+      "lat": 48.369200,
+      "lng": 10.897710
+    }
+  },
+  {
+    "title": "Hauptbahnhof Augsburg",
+    "address": "Hauptbahnhof Augsburg",
+    "url": "google.com",
+    "position": {
+      "lat": 48.365990,
+      "lng": 10.893040
+    }
+  }
+]
