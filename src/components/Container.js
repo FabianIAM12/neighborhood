@@ -9,13 +9,11 @@ export class Container extends Component {
         activeMarker: {},
         activeMarkerProps: {},
         showDetails: false,
-        selectedLocation: {},
-        locationData: {}
-    }
+    };
 
     mapIsReady = (props, map) => {
         this.setState({map})
-    }
+    };
 
     onClickMarker = (props, marker, e) => {
         this.setState({
@@ -23,7 +21,7 @@ export class Container extends Component {
             activeMarker: marker,
             activeMarkerProps: props
         })
-    }
+    };
 
     onInfoWindowClose = () =>
         this.setState({
@@ -36,46 +34,67 @@ export class Container extends Component {
         const style = {
             width: '100%',
             height: '100%'
-        }
+        };
 
-        let {markers} = this.props
+        let {markers, menu_visible} = this.props;
         let {activeMarker, activeMarkerProps} = this.state;
 
         return (
             <div>
-                <Map
-                    role="application"
-                    aria-label="map"
-                    google={this.props.google}
-                    onReady={this.mapIsReady}
-                    style={style}
-                    zoom={14}
-                    initialCenter={{
-                        lat: 48.371620,
-                        lng: 10.883740
-                    }}>
-                    {markers.map(marker => (
-                        <Marker
-                            role='application'
-                            aria-label='map'
-                            key={marker.key}
-                            title={marker.title}
-                            name={marker.name}
-                            position={marker.position}
-                            onClick={this.onClickMarker}
-                        />
-                    ))}
-                    <InfoWindow
-                        marker={activeMarker}
-                        visible={this.state.showInfoWindow}
-                        onClose={this.state.onInfoWindowClose}>
-                        <div className='info-window'>
-                            <h4>{activeMarkerProps.title}</h4>
-                            <p>{activeMarkerProps.address}</p>
-                        </div>
-                    </InfoWindow>
-
-                </Map>
+                <div style={{height: 'calc(100%-10vmin', width: '90%'}}>
+                    <Map
+                        className="map"
+                        role="application"
+                        aria-label="map"
+                        google={this.props.google}
+                        onReady={this.mapIsReady}
+                        style={style}
+                        zoom={14}
+                        initialCenter={{
+                            lat: 48.371620,
+                            lng: 10.883740
+                        }}>
+                        {markers.map(marker => (
+                            <Marker
+                                role='application'
+                                aria-label='map'
+                                key={marker.key}
+                                title={marker.title}
+                                name={marker.name}
+                                position={marker.position}
+                                onClick={this.onClickMarker}
+                            />
+                        ))}
+                        <InfoWindow
+                            marker={activeMarker}
+                            visible={this.state.showInfoWindow}
+                            onClose={this.state.onInfoWindowClose}>
+                            <div className='info-window'>
+                                <h1>{activeMarkerProps.title}</h1>
+                                <span>{activeMarkerProps.address}</span>
+                            </div>
+                        </InfoWindow>
+                    </Map>
+                </div>
+                {menu_visible && (
+                    <div className="menu">
+                        <input type="text"
+                               name="filter"
+                               placeholder="Filter Locations..."
+                               onChange={(e) => {
+                                   this.props.SearchQuery(e.target.value);
+                                   this.setState({showDetails: false})
+                               }}>
+                        </input>
+                        <ul>
+                            {markers.map(marker => (
+                                <li>
+                                    {marker.title}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
         );
     }
