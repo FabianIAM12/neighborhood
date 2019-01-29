@@ -1,7 +1,6 @@
 # React Neighborhood
 
 This Application shows the best beer locations in the City of Augsburg.
-It shows the best Beer places in Augsburg and their ratings.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
