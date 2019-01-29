@@ -5,6 +5,7 @@ import {GoogleApiWrapper, InfoWindow, Map, Marker} from 'google-maps-react';
 export class Container extends Component {
     state = {
         map: null,
+        showInfoWindow: false,
         activeMarker: {},
         activeMarkerProps: {},
         showDetails: false,
@@ -17,15 +18,19 @@ export class Container extends Component {
     }
 
     onClickMarker = (props, marker, e) => {
-        this.setState({showInfoWindow: true,
+        this.setState({
+            showInfoWindow: true,
             activeMarker: marker,
-            activeMarkerProps: props})
+            activeMarkerProps: props
+        })
     }
 
     onInfoWindowClose = () =>
-        this.setState({ activeMarker: {},
+        this.setState({
+            activeMarker: {},
             showingInfoWindow:
-            false, activeMarkerProps: {} });
+                false, activeMarkerProps: {}
+        });
 
     render() {
         const style = {
@@ -33,44 +38,45 @@ export class Container extends Component {
             height: '100%'
         }
 
-        let { markers} = this.props
-        let { activeMarker, activeMarkerProps} = this.state;
+        let {markers} = this.props
+        let {activeMarker, activeMarkerProps} = this.state;
 
         return (
-
-            <Map
-                role="application"
-                aria-label="map"
-                google={this.props.google}
-                onReady={this.mapIsReady}
-                style={style}
-                zoom={14}
-                initialCenter={{
-                    lat: 48.371620,
-                    lng: 10.883740
-                }}>
-                {markers.map(marker => (
-                    <Marker
-                        role='application'
-                        aria-label='map'
-                        key={marker.key}
-                        title={marker.title}
-                        name={marker.name}
-                        position={marker.position}
-                        onClick={this.onClickMarker}
-                    />
+            <div>
+                <Map
+                    role="application"
+                    aria-label="map"
+                    google={this.props.google}
+                    onReady={this.mapIsReady}
+                    style={style}
+                    zoom={14}
+                    initialCenter={{
+                        lat: 48.371620,
+                        lng: 10.883740
+                    }}>
+                    {markers.map(marker => (
+                        <Marker
+                            role='application'
+                            aria-label='map'
+                            key={marker.key}
+                            title={marker.title}
+                            name={marker.name}
+                            position={marker.position}
+                            onClick={this.onClickMarker}
+                        />
                     ))}
                     <InfoWindow
                         marker={activeMarker}
                         visible={this.state.showInfoWindow}
                         onClose={this.state.onInfoWindowClose}>
                         <div className='info-window'>
-                            <h4>{activeMarkerProps.name}</h4>
+                            <h4>{activeMarkerProps.title}</h4>
                             <p>{activeMarkerProps.address}</p>
                         </div>
                     </InfoWindow>
 
-            </Map>
+                </Map>
+            </div>
         );
     }
 }
