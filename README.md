@@ -1,8 +1,8 @@
 # React Neighborhood
 
-This Application shows the best beer locations in the City of Augsburg.
+This Application shows the best beer locations in the City of Augsburg and also their customer ratings.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built with the JavaScript Framework React.
 
 ## `Used APIs`
 * Google Maps
@@ -17,8 +17,15 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Learn More
+## Main Project requirements
+# Usability & Interface
+* All application components render on-screen in a responsive manner.
+* All application components are usable across modern desktop, tablet, and phone browsers.
+* Accessibility
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#Application Functionality
+* A location filter with maps and markers
+* Additional location data (3rd Party Apis)
+* Service Worker
+* Proper Use of React
 
-To learn React, check out the [React documentation](https://reactjs.org/).
