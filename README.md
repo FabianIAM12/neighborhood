@@ -18,14 +18,13 @@ Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Main Project requirements
-# Usability & Interface
+### Usability & Interface
 * All application components render on-screen in a responsive manner.
 * All application components are usable across modern desktop, tablet, and phone browsers.
-* Accessibility
+* Accessibility (ARIA, Focus)
 
-#Application Functionality
+### Application Functionality
 * A location filter with maps and markers
 * Additional location data (3rd Party Apis)
 * Service Worker
-* Proper Use of React
-
+* Proper Use of React Components
