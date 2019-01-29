@@ -4,7 +4,7 @@ import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 import Container from "./components/Container";
 import location_data from './locations';
-import {FaBars} from "react-icons/fa";
+import {FaGlasses} from "react-icons/fa";
 
 
 class App extends Component {
@@ -15,13 +15,19 @@ class App extends Component {
     };
 
     componentWillMount() {
-        this.setState({locations: location_data})
+        this.setState({locations: this.SortData(location_data)})
     }
 
     ToggleMenu = () => {
         this.setState({menu_visible: !this.state.menu_visible})
     };
 
+    /* always sorts the data by stars */
+    SortData = (data) => {
+      return data.sort(sortBy('rating')).reverse()
+    };
+
+    /* search function for static data */
     SearchQuery = (query) => {
         this.setState({query: query.trim()});
         let showingLocations = '';
@@ -30,9 +36,9 @@ class App extends Component {
             const match = new RegExp(escapeRegExp(query), 'i');
             showingLocations = location_data.filter((location) =>
                 match.test(location.title));
-            this.setState({locations: showingLocations})
+            this.setState({locations: this.SortData(showingLocations)})
         } else {
-            this.setState({locations: location_data.sort(sortBy('name'))})
+            this.setState({locations: this.SortData(location_data) })
         }
     };
 
@@ -43,7 +49,7 @@ class App extends Component {
                     <h1>
                         Best Beer Locations in Augsburg
                     </h1>
-                    <button className="side-menu-button" onClick={this.ToggleMenu}><FaBars/></button>
+                    <button className="side-menu-button" onClick={this.ToggleMenu}><FaGlasses/></button>
                 </div>
                 <Container
                     menu_visible={this.state.menu_visible}

@@ -17,7 +17,7 @@
     background-color: #E51535;
 }
 .side-menu-button {
-    background-color: #FAA70D;
+    background-color: #CBA92B;
     position: absolute;
     min-width: 40px;
     min-height: 40px;
@@ -28,29 +28,40 @@
     border-radius: 3px;
 }
 
+.side-menu-button:hover {
+    cursor: pointer;
+}
+
 .menu {
     position: absolute;
-    width: 250px;
+    width: 330px;
     height: calc(100% - 6vmin);
     top: calc(6vmin);
     border-bottom: 1px solid #d5d8df;
-    background-color: #CBA92B;
-    padding-left:23px;
+    background-color: #FAA70D;
+    padding: 25px;
 }
 
 .menu input {
     margin-top: 8px;
-    width: 85%;
+    width: 100%;
     border-radius: 3px;
 }
 
 .menu ul {
-    padding: 3px 0px 0px 3px;
     list-style-type: none;
+    padding: 0;
 }
 
 .menu li {
     font-size: 25px;
+    cursor: grabbing;
+    padding-left: 3px;
+}
+
+.menu li:hover {
+    background-color: #E51535;
+    color: white;
 }
 
 .info-window {
@@ -61,3 +72,13 @@
     font-size: 40px;
 }
 
+.star-rating-menu {
+    font-size: 17px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.info-window-stars {
+    text-align: center;
+}

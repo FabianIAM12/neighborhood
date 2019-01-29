@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {GoogleApiWrapper, InfoWindow, Map, Marker} from 'google-maps-react';
+import {FaStar} from "react-icons/fa";
 
 
 export class Container extends Component {
@@ -7,28 +8,34 @@ export class Container extends Component {
         map: null,
         showInfoWindow: false,
         activeMarker: {},
-        activeMarkerProps: {},
+        allMarkerObj: [],
         showDetails: false,
+        selectedLocation: {},
     };
 
     mapIsReady = (props, map) => {
         this.setState({map})
     };
 
-    onClickMarker = (props, marker, e) => {
+    ClickMarker = (props, marker, e) => {
+        console.log(props);
+
         this.setState({
             showInfoWindow: true,
-            activeMarker: marker,
-            activeMarkerProps: props
+            activeMarker: marker
         })
     };
 
-    onInfoWindowClose = () =>
+    InfoWindowClose = () => {
         this.setState({
             activeMarker: {},
-            showingInfoWindow:
-                false, activeMarkerProps: {}
+            showInfoWindow: false,
         });
+    };
+
+    GetFurtherLocationInformation = (marker) => {
+
+    };
 
     render() {
         const style = {
@@ -37,11 +44,11 @@ export class Container extends Component {
         };
 
         let {markers, menu_visible} = this.props;
-        let {activeMarker, activeMarkerProps} = this.state;
+        let {activeMarker} = this.state;
 
         return (
             <div>
-                <div style={{height: 'calc(100%-10vmin', width: '90%'}}>
+                <div>
                     <Map
                         className="map"
                         role="application"
@@ -61,17 +68,24 @@ export class Container extends Component {
                                 key={marker.key}
                                 title={marker.title}
                                 name={marker.name}
+                                rating={marker.rating}
+                                url={marker.url}
                                 position={marker.position}
-                                onClick={this.onClickMarker}
+                                onClick={this.ClickMarker}
                             />
                         ))}
                         <InfoWindow
                             marker={activeMarker}
                             visible={this.state.showInfoWindow}
-                            onClose={this.state.onInfoWindowClose}>
+                            onClose={this.InfoWindowClose}>
                             <div className='info-window'>
-                                <h1>{activeMarkerProps.title}</h1>
-                                <span>{activeMarkerProps.address}</span>
+                                <h1>{activeMarker.title}</h1>
+                                <span className="info-window-stars">
+                                {Array.from(Array(activeMarker.rating), (e, i) => {
+                                    return <FaStar key={i}>{i}</FaStar>
+                                })}
+                                </span>
+                                <p>{activeMarker.url}</p>
                             </div>
                         </InfoWindow>
                     </Map>
@@ -80,7 +94,7 @@ export class Container extends Component {
                     <div className="menu">
                         <input type="text"
                                name="filter"
-                               placeholder="Filter Locations..."
+                               placeholder="Filter best Beer Locations..."
                                onChange={(e) => {
                                    this.props.SearchQuery(e.target.value);
                                    this.setState({showDetails: false})
@@ -88,8 +102,13 @@ export class Container extends Component {
                         </input>
                         <ul>
                             {markers.map(marker => (
-                                <li>
+                                <li key={marker.key} onClick={() => this.GetFurtherLocationInformation(marker)}>
                                     {marker.title}
+                                    <span className="star-rating-menu">
+                                    {Array.from(Array(marker.rating), (e, i) => {
+                                        return <FaStar key={i}>{i}</FaStar>
+                                    })}
+                                    </span>
                                 </li>
                             ))}
                         </ul>
