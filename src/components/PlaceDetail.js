@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Stars from "./Container";
 
 
 export class PlaceDetail extends Component {
