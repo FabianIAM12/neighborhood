@@ -143,8 +143,9 @@ export class Container extends Component {
                         <input type="text"
                                name="filter"
                                role="search"
-                               tabIndex="2"
                                aria-label="Search"
+                               aria-labelledby="searchLabel"
+                               tabIndex="2"
                                placeholder="Filter best Beer Locations..."
                                onChange={(e) => {
                                    this.props.SearchQuery(e.target.value);
