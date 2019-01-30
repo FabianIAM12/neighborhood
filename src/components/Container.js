@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {GoogleApiWrapper, InfoWindow, Map, Marker} from 'google-maps-react';
 import Stars from "./Stars";
 import api from '../api';
+import PlaceDetail from "./PlaceDetail";
 
 export class Container extends Component {
     state = {
@@ -9,8 +10,8 @@ export class Container extends Component {
         showInfoWindow: false,
         activeMarker: {},
         allMarkerObj: {},
-        showDetails: false,
-        LocationDetails: {},
+        showSinglePlaceDetails: false,
+        locationDetails: {},
     };
 
     mapIsReady = (props, map) => {
@@ -35,16 +36,13 @@ export class Container extends Component {
     GetFurtherLocationInformation = (marker) => {
         const url_search = `https://api.foursquare.com/v2/venues/search?ll=${marker.position.lat},${marker.position.lng}&limit=1&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
 
-        console.log(url_search);
-
         fetch(url_search)
             .then(function (response) {
                 return response.json();
             })
             .then(function (myJson) {
-                const venue_id = myJson.response.venues[0];
-                console.log(venue_id);
-
+                /*
+                TODO: GET PICTURES FROM FOURSQUARE API, doesnt work properly unfortunately
                 const venue_page = `https://api.foursquare.com/v2/venues/412d2800f964a520df0c1fe3&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
                 fetch(venue_page)
                     .then(function (response) {
@@ -54,9 +52,12 @@ export class Container extends Component {
                         const venue_id = myJson.response;
                         console.log(venue_id);
                     }.bind(this));
-
-
-                this.setState({LocationDetails: myJson.response.venues[0].id})
+                */
+                this.setState({
+                    locationDetails: {address: myJson.response.venues[0].location.address,
+                    category: myJson.response.venues[0].categories[0].name},
+                    details_visible: true
+                })
             }.bind(this));
     };
 
@@ -67,7 +68,7 @@ export class Container extends Component {
         };
 
         let {markers, menu_visible} = this.props;
-        let {activeMarker} = this.state;
+        let {activeMarker, details_visible, locationDetails, showInfoWindow} = this.state;
 
         return (
             <div>
@@ -93,14 +94,13 @@ export class Container extends Component {
                                 name={marker.name}
                                 rating={marker.rating}
                                 url={marker.url}
-                                address={marker.address}
                                 position={marker.position}
                                 onClick={this.ClickMarker}
                             />
                         ))}
                         <InfoWindow
                             marker={activeMarker}
-                            visible={this.state.showInfoWindow}
+                            visible={showInfoWindow}
                             onClose={this.InfoWindowClose}>
                             <div className='info-window'>
                                 <h1>{activeMarker.title}</h1>
@@ -118,7 +118,7 @@ export class Container extends Component {
                                placeholder="Filter best Beer Locations..."
                                onChange={(e) => {
                                    this.props.SearchQuery(e.target.value);
-                                   this.setState({showDetails: false})
+                                   this.setState({details_visible: false})
                                }}>
                         </input>
                         <ul>
@@ -129,6 +129,9 @@ export class Container extends Component {
                                 </li>
                             ))}
                         </ul>
+                        {details_visible && (
+                            <PlaceDetail locationDetails={locationDetails}/>
+                        )}
                     </div>
                 )}
             </div>

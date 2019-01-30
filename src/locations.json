@@ -2,7 +2,6 @@
   {
     "key": 1,
     "title": "Riegele WirtsHaus",
-    "address": "Frölichstraße 26, 86150 Augsburg",
     "url": "riegele-wirtshaus.de",
     "rating": 5,
     "position": {
@@ -13,7 +12,6 @@
   {
     "key": 2,
     "title": "Zur Brezn",
-    "address": "Barthshof 2, 86150 Augsburg",
     "url": "",
     "rating": 1,
     "position": {
@@ -24,7 +22,6 @@
   {
     "key": 3,
     "title": "11er Fußball Kneipe",
-    "address": "Dominikanergasse 14, 86150 Augsburg",
     "url": "http://www.11er.biz/",
     "rating": 3,
     "position": {
@@ -35,7 +32,6 @@
   {
     "key": 4,
     "title": "Drei Mohren",
-    "address": "Maximilianstraße 40, 86150 Augsburg",
     "url": "http://steigenberger.com",
     "rating": 4,
     "position": {
@@ -46,7 +42,6 @@
   {
     "key": 5,
     "title": "König von Flandern",
-    "address": "Karolinenstraße 12, 86150 Augsburg",
     "url": "http://koenigvonflandern.de",
     "rating": 3,
     "position": {
@@ -57,7 +52,6 @@
   {
     "key": 6,
     "title": "annapam.",
-    "address": "Bäckergasse 23, 86150 Augsburg",
     "url": "http://www.annapam.de/",
     "rating": 4,
     "position": {
@@ -68,7 +62,6 @@
   {
     "key": 7,
     "title": "mamo lounge",
-    "address": "Maximilianstraße 30, 86150 Augsburg",
     "url": "http://mamo-lounge.de",
     "rating": 5,
     "position": {
