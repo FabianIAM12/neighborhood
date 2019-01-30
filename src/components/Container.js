@@ -89,8 +89,12 @@ export class Container extends Component {
             height: '100%'
         };
 
-        let {markers, menu_visible} = this.props;
-        let {activeMarker, details_visible, locationDetails, showInfoWindow} = this.state;
+        let {markers,
+            menu_visible} = this.props;
+        let {activeMarker,
+            details_visible,
+            locationDetails,
+            showInfoWindow} = this.state;
 
         return (
             <div>
