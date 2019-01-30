@@ -6,16 +6,11 @@ import PlaceDetail from "./PlaceDetail";
 
 export class Container extends Component {
     state = {
-        map: null,
         showInfoWindow: false,
+        showSinglePlaceDetails: false,
         activeMarker: {},
         allMarkerObj: {},
-        showSinglePlaceDetails: false,
         locationDetails: {},
-    };
-
-    mapIsReady = (props, map) => {
-        this.setState({map})
     };
 
     ClickMarker = (props, marker, e) => {
@@ -42,7 +37,7 @@ export class Container extends Component {
             })
             .then(function (myJson) {
                 /*
-                TODO: GET PICTURES FROM FOURSQUARE API, doesnt work properly unfortunately
+                TODO: GET PICTURES FROM FOURSQUARE API, doesnt work at the moment
                 const venue_page = `https://api.foursquare.com/v2/venues/412d2800f964a520df0c1fe3&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
                 fetch(venue_page)
                     .then(function (response) {
@@ -54,8 +49,10 @@ export class Container extends Component {
                     }.bind(this));
                 */
                 this.setState({
-                    locationDetails: {address: myJson.response.venues[0].location.address,
-                    category: myJson.response.venues[0].categories[0].name},
+                    locationDetails: {
+                        address: myJson.response.venues[0].location.address,
+                        category: myJson.response.venues[0].categories[0].name
+                    },
                     details_visible: true
                 })
             }.bind(this));
