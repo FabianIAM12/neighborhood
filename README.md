@@ -6,7 +6,7 @@ This project was built with the JavaScript Framework React.
 
 ## `Used APIs`
 * Google Maps
-* Wikipedia
+* Foursquare
 
 ## `Getting started`
 

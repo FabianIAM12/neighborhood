@@ -43,17 +43,19 @@ class App extends Component {
     };
 
     render() {
+        const {menu_visible, locations} = this.state;
+
         return (
             <div className="App">
                 <div className="header">
                     <h1 className="headline">
                         Best Beer Locations in Augsburg
                     </h1>
-                    <button className="side-menu-button" onClick={this.ToggleMenu}><FaGlasses/></button>
+                    <button tabIndex="1" className="side-menu-button" onClick={this.ToggleMenu}><FaGlasses/></button>
                 </div>
                 <Container
-                    menu_visible={this.state.menu_visible}
-                    markers={this.state.locations}
+                    menu_visible={menu_visible}
+                    markers={locations}
                     SearchQuery={this.SearchQuery}>
                 </Container>
             </div>

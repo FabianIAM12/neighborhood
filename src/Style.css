@@ -12,24 +12,29 @@
 }
 
 .headline {
-    font-size: 2.0em;
-    margin:0px;
-    padding:7px 0 0 0;
+    font-size: 4vh;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
-    min-height: 6vmin;
+    min-height: 10vh;
     text-align: center;
     background-color: #E51535;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
 .side-menu-button {
     background-color: #CBA92B;
     position: absolute;
-    min-width: 40px;
-    min-height: 40px;
-    left: 25px;
-    top: 7.5px;
-    font-size: 17px;
+    min-width: 8vh;
+    min-height: 8vh;
+    left: 0.8vh;
+    top: 0.95vh;
+    font-size: 2.5vh;
     border: none;
     border-radius: 3px;
 }
@@ -41,7 +46,7 @@
 .menu {
     position: absolute;
     width: 330px;
-    height: calc(100% - 6vmin);
+    height: 100%;
     border-bottom: 1px solid #d5d8df;
     background-color: #FAA70D;
     padding: 25px;
@@ -59,9 +64,9 @@
 }
 
 .menu li {
-    font-size: 25px;
     cursor: grabbing;
     padding-left: 3px;
+    font-size: 2.75vh;
 }
 
 .menu li:hover {
@@ -78,10 +83,10 @@
 }
 
 .star-rating-menu {
-    font-size: 17px;
     float: right;
     margin-right: 5px;
     margin-top: 5px;
+    font-size: 2.00vh;
 }
 
 .info-window-stars {
@@ -89,6 +94,18 @@
 }
 
 .further_details {
-    font-size: 1.85em;
+    font-size: 2.6vh;
     line-height: 0.6em;
+}
+
+@media only screen
+and (max-device-width: 736px) {
+    .menu {
+        width: 180px;
+        padding: 3px;
+    }
+
+    .gm-style-mtc {
+        display: none;
+    }
 }

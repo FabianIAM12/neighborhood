@@ -9,19 +9,32 @@ export class Container extends Component {
         showInfoWindow: false,
         showSinglePlaceDetails: false,
         activeMarker: {},
-        allMarkerObj: {},
         locationDetails: {},
+        animatedMarker: []
     };
 
-    ClickMarker = (props, marker, e) => {
+    StopAnimations = () => {
+        /* Its not the best solution, but it works */
+        for(let old_marker in this.state.animatedMarker){
+            this.state.animatedMarker[old_marker].setAnimation(null);
+        }
+    };
+
+    ClickMarker = (props, marker) => {
+        this.StopAnimations();
+
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        this.state.animatedMarker.push(marker);
 
         this.setState({
             showInfoWindow: true,
-            activeMarker: marker
+            activeMarker: marker,
         })
     };
 
     InfoWindowClose = () => {
+        this.StopAnimations();
+
         this.setState({
             activeMarker: {},
             showInfoWindow: false,
@@ -36,6 +49,7 @@ export class Container extends Component {
                 return response.json();
             })
             .then(function (myJson) {
+
                 /*
                 TODO: GET PICTURES FROM FOURSQUARE API, doesnt work at the moment
                 const venue_page = `https://api.foursquare.com/v2/venues/412d2800f964a520df0c1fe3&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
@@ -48,13 +62,24 @@ export class Container extends Component {
                         console.log(venue_id);
                     }.bind(this));
                 */
-                this.setState({
-                    locationDetails: {
-                        address: myJson.response.venues[0].location.address,
-                        category: myJson.response.venues[0].categories[0].name
-                    },
-                    details_visible: true
-                })
+
+                if(myJson.meta["code"]!==400){
+                    this.setState({
+                        locationDetails: {
+                            address: myJson.response.venues[0].location.address,
+                            category: myJson.response.venues[0].categories[0].name
+                        },
+                        details_visible: true
+                    })
+                }else{
+                    this.setState({
+                        locationDetails: {
+                            address: 'Service not available',
+                            category: ''
+                        },
+                        details_visible: true
+                    })
+                }
             }.bind(this));
     };
 
@@ -82,10 +107,8 @@ export class Container extends Component {
                             lat: 48.371620,
                             lng: 10.883740
                         }}>
-                        {markers.map(marker => (
+                        {markers.map((marker, index) => (
                             <Marker
-                                role='application'
-                                aria-label='map'
                                 key={marker.key}
                                 title={marker.title}
                                 name={marker.name}
@@ -93,9 +116,12 @@ export class Container extends Component {
                                 url={marker.url}
                                 position={marker.position}
                                 onClick={this.ClickMarker}
+
                             />
                         ))}
                         <InfoWindow
+                            role="dialog"
+                            aria-labelledby={activeMarker.title}
                             marker={activeMarker}
                             visible={showInfoWindow}
                             onClose={this.InfoWindowClose}>
@@ -112,6 +138,9 @@ export class Container extends Component {
                     <div className="menu">
                         <input type="text"
                                name="filter"
+                               role="search"
+                               tabIndex="2"
+                               aria-label="Search"
                                placeholder="Filter best Beer Locations..."
                                onChange={(e) => {
                                    this.props.SearchQuery(e.target.value);
@@ -120,7 +149,9 @@ export class Container extends Component {
                         </input>
                         <ul>
                             {markers.map(marker => (
-                                <li key={marker.key} onClick={() => this.GetFurtherLocationInformation(marker)}>
+                                <li role="button"
+                                    aria-pressed="false"
+                                    key={marker.key} onClick={() => this.GetFurtherLocationInformation(marker)}>
                                     {marker.title}
                                     <Stars rating={marker.rating} class={"star-rating-menu"}/>
                                 </li>
