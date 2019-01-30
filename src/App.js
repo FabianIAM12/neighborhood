@@ -22,7 +22,7 @@ class App extends Component {
         this.setState({menu_visible: !this.state.menu_visible})
     };
 
-    /* always sorts the data by stars */
+    /* always sorts the data by stars - from much to less*/
     SortData = (data) => {
       return data.sort(sortBy('rating')).reverse()
     };
@@ -46,7 +46,7 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="header">
-                    <h1>
+                    <h1 className="headline">
                         Best Beer Locations in Augsburg
                     </h1>
                     <button className="side-menu-button" onClick={this.ToggleMenu}><FaGlasses/></button>

@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {GoogleApiWrapper, InfoWindow, Map, Marker} from 'google-maps-react';
-import {FaStar} from "react-icons/fa";
-
+import Stars from "./Stars";
+import api from '../api';
 
 export class Container extends Component {
     state = {
         map: null,
         showInfoWindow: false,
         activeMarker: {},
-        allMarkerObj: [],
+        allMarkerObj: {},
         showDetails: false,
-        selectedLocation: {},
+        LocationDetails: {},
     };
 
     mapIsReady = (props, map) => {
@@ -18,7 +18,6 @@ export class Container extends Component {
     };
 
     ClickMarker = (props, marker, e) => {
-        console.log(props);
 
         this.setState({
             showInfoWindow: true,
@@ -34,7 +33,31 @@ export class Container extends Component {
     };
 
     GetFurtherLocationInformation = (marker) => {
+        const url_search = `https://api.foursquare.com/v2/venues/search?ll=${marker.position.lat},${marker.position.lng}&limit=1&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
 
+        console.log(url_search);
+
+        fetch(url_search)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                const venue_id = myJson.response.venues[0];
+                console.log(venue_id);
+
+                const venue_page = `https://api.foursquare.com/v2/venues/412d2800f964a520df0c1fe3&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
+                fetch(venue_page)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        const venue_id = myJson.response;
+                        console.log(venue_id);
+                    }.bind(this));
+
+
+                this.setState({LocationDetails: myJson.response.venues[0].id})
+            }.bind(this));
     };
 
     render() {
@@ -70,6 +93,7 @@ export class Container extends Component {
                                 name={marker.name}
                                 rating={marker.rating}
                                 url={marker.url}
+                                address={marker.address}
                                 position={marker.position}
                                 onClick={this.ClickMarker}
                             />
@@ -80,12 +104,9 @@ export class Container extends Component {
                             onClose={this.InfoWindowClose}>
                             <div className='info-window'>
                                 <h1>{activeMarker.title}</h1>
-                                <span className="info-window-stars">
-                                {Array.from(Array(activeMarker.rating), (e, i) => {
-                                    return <FaStar key={i}>{i}</FaStar>
-                                })}
-                                </span>
+                                <Stars rating={activeMarker.rating} class={"info-window-stars"}/>
                                 <p>{activeMarker.url}</p>
+                                <h2>{activeMarker.address}</h2>
                             </div>
                         </InfoWindow>
                     </Map>
@@ -104,11 +125,7 @@ export class Container extends Component {
                             {markers.map(marker => (
                                 <li key={marker.key} onClick={() => this.GetFurtherLocationInformation(marker)}>
                                     {marker.title}
-                                    <span className="star-rating-menu">
-                                    {Array.from(Array(marker.rating), (e, i) => {
-                                        return <FaStar key={i}>{i}</FaStar>
-                                    })}
-                                    </span>
+                                    <Stars rating={marker.rating} class={"star-rating-menu"}/>
                                 </li>
                             ))}
                         </ul>

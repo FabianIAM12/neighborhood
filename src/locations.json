@@ -1,57 +1,79 @@
 [
   {
     "key": 1,
-    "title": "wohnung",
-    "address": "wohnung",
-    "url": "google.com",
+    "title": "Riegele WirtsHaus",
+    "address": "Frölichstraße 26, 86150 Augsburg",
+    "url": "riegele-wirtshaus.de",
     "rating": 5,
     "position": {
-      "lat": 48.371620,
-      "lng": 10.883740
+      "lat": 48.369260,
+      "lng": 10.888450
     }
   },
   {
     "key": 2,
-    "title": "Dom",
-    "address": "dom",
-    "url": "google.com",
-    "rating": 2,
+    "title": "Zur Brezn",
+    "address": "Barthshof 2, 86150 Augsburg",
+    "url": "",
+    "rating": 1,
     "position": {
-      "lat": 48.385120,
-      "lng": 10.903780
+      "lat": 48.365730,
+      "lng": 10.895210
     }
   },
   {
     "key": 3,
-    "title": "Theater",
-    "address": "theater",
-    "url": "google.com",
+    "title": "11er Fußball Kneipe",
+    "address": "Dominikanergasse 14, 86150 Augsburg",
+    "url": "http://www.11er.biz/",
     "rating": 3,
     "position": {
-      "lat": 48.365990,
-      "lng": 10.893040
+      "lat": 48.365300,
+      "lng": 10.900260
     }
   },
   {
     "key": 4,
-    "title": "Rathausplatz",
-    "address": "rathausplatz",
-    "url": "google.com",
+    "title": "Drei Mohren",
+    "address": "Maximilianstraße 40, 86150 Augsburg",
+    "url": "http://steigenberger.com",
     "rating": 4,
     "position": {
-      "lat": 48.369200,
-      "lng": 10.897710
+      "lat": 48.365440,
+      "lng": 10.898710
     }
   },
   {
     "key": 5,
-    "title": "Hauptbahnhof Augsburg",
-    "address": "Hauptbahnhof Augsburg",
-    "url": "google.com",
+    "title": "König von Flandern",
+    "address": "Karolinenstraße 12, 86150 Augsburg",
+    "url": "http://koenigvonflandern.de",
+    "rating": 3,
+    "position": {
+      "lat": 48.370010,
+      "lng": 10.898340
+    }
+  },
+  {
+    "key": 6,
+    "title": "annapam.",
+    "address": "Bäckergasse 23, 86150 Augsburg",
+    "url": "http://www.annapam.de/",
+    "rating": 4,
+    "position": {
+      "lat": 48.362659,
+      "lng": 10.902920
+    }
+  },
+  {
+    "key": 7,
+    "title": "mamo lounge",
+    "address": "Maximilianstraße 30, 86150 Augsburg",
+    "url": "http://mamo-lounge.de",
     "rating": 5,
     "position": {
-      "lat": 48.365990,
-      "lng": 10.893040
+      "lat": 48.366700,
+      "lng": 10.898360
     }
   }
 ]
