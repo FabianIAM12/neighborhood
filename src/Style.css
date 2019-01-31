@@ -108,6 +108,7 @@ and (max-device-width : 1024px)  {
     .headline {
         font-size: 2.8vh;
     }
+
     .menu {
         width: 260px;
         padding: 20px;
@@ -115,6 +116,10 @@ and (max-device-width : 1024px)  {
 
     .side-menu-button {
         margin-left: 260px;
+    }
+
+    .star-rating-menu {
+        font-size: 1.30vh;
     }
 }
 
@@ -132,6 +137,10 @@ and (max-device-width: 767px) {
 
     .side-menu-button {
         margin-left: 180px;
+    }
+
+    .star-rating-menu {
+        font-size: 0.80vh;
     }
 
     .gm-style-mtc {
