@@ -4,6 +4,7 @@ import Stars from "./Stars";
 import api from '../api';
 import PlaceDetail from "./PlaceDetail";
 
+
 export class Container extends Component {
     state = {
         showInfoWindow: false,
@@ -15,7 +16,7 @@ export class Container extends Component {
 
     StopAnimations = () => {
         /* Its not the best solution, but it works */
-        for(let old_marker in this.state.animatedMarker){
+        for (let old_marker in this.state.animatedMarker) {
             this.state.animatedMarker[old_marker].setAnimation(null);
         }
     };
@@ -32,7 +33,7 @@ export class Container extends Component {
         })
     };
 
-    InfoWindowClose = () => {
+    CloseInfoWindow = () => {
         this.StopAnimations();
 
         this.setState({
@@ -51,8 +52,8 @@ export class Container extends Component {
             .then(function (myJson) {
 
                 /*
-                TODO: GET PICTURES FROM FOURSQUARE API, doesnt work at the moment
-                const venue_page = `https://api.foursquare.com/v2/venues/412d2800f964a520df0c1fe3&client_id=${api["client_id"]}&client_secret=${api["client_secret"]}&v=${api["version"]}`;
+                TODO: GET PICTURES FROM FOURSQUARE API, doesnt work at the moment?
+                const venue_page = `https://api.foursquare.com/v2/venues/"]}`;
                 fetch(venue_page)
                     .then(function (response) {
                         return response.json();
@@ -63,7 +64,7 @@ export class Container extends Component {
                     }.bind(this));
                 */
 
-                if(myJson.meta["code"]!==400){
+                if (myJson.meta["code"] !== 400) {
                     this.setState({
                         locationDetails: {
                             address: myJson.response.venues[0].location.address,
@@ -71,7 +72,7 @@ export class Container extends Component {
                         },
                         details_visible: true
                     })
-                }else{
+                } else {
                     this.setState({
                         locationDetails: {
                             address: 'Service not available',
@@ -89,12 +90,16 @@ export class Container extends Component {
             height: '100%'
         };
 
-        let {markers,
-            menu_visible} = this.props;
-        let {activeMarker,
+        let {
+            markers,
+            menu_visible
+        } = this.props;
+        let {
+            activeMarker,
             details_visible,
             locationDetails,
-            showInfoWindow} = this.state;
+            showInfoWindow
+        } = this.state;
 
         return (
             <div>
@@ -128,7 +133,7 @@ export class Container extends Component {
                             aria-labelledby={activeMarker.title}
                             marker={activeMarker}
                             visible={showInfoWindow}
-                            onClose={this.InfoWindowClose}>
+                            onClose={this.CloseInfoWindow}>
                             <div className='info-window'>
                                 <h1>{activeMarker.title}</h1>
                                 <Stars rating={activeMarker.rating} class={"info-window-stars"}/>
@@ -153,9 +158,10 @@ export class Container extends Component {
                                }}>
                         </input>
                         <ul>
-                            {markers.map(marker => (
+                            {markers.map((marker, i) => (
                                 <li role="button"
                                     aria-pressed="false"
+                                    tabIndex={i+3}
                                     key={marker.key} onClick={() => this.GetFurtherLocationInformation(marker)}>
                                     {marker.title}
                                     <Stars rating={marker.rating} class={"star-rating-menu"}/>

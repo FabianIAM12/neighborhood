@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
-/* trashy colors of my palette
+/* trashy colors of my beer palette
 #E51535
 #FAA70D
 #CBA92B
@@ -19,12 +19,12 @@
 
 .header {
     min-height: 10vh;
-    text-align: center;
     background-color: #E51535;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    padding-right: 2.5vh;
 }
 
 .side-menu-button {
@@ -37,6 +37,7 @@
     font-size: 2.5vh;
     border: none;
     border-radius: 3px;
+    margin-left: 335px;
 }
 
 .side-menu-button:hover {
@@ -44,12 +45,14 @@
 }
 
 .menu {
-    position: absolute;
+    position: fixed;
     width: 330px;
     height: 100%;
     border-bottom: 1px solid #d5d8df;
     background-color: #FAA70D;
     padding: 25px;
+    top: 0;
+    left: 0;
 }
 
 .menu input {
@@ -98,11 +101,37 @@
     line-height: 0.6em;
 }
 
+/* Tablets */
 @media only screen
-and (max-device-width: 736px) {
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  {
+    .headline {
+        font-size: 2.8vh;
+    }
+    .menu {
+        width: 260px;
+        padding: 20px;
+    }
+
+    .side-menu-button {
+        margin-left: 260px;
+    }
+}
+
+/* Smartphones */
+@media only screen
+and (max-device-width: 767px) {
+    .headline {
+        font-size: 1.8vh;
+    }
+
     .menu {
         width: 180px;
         padding: 3px;
+    }
+
+    .side-menu-button {
+        margin-left: 180px;
     }
 
     .gm-style-mtc {
