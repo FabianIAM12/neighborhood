@@ -14,7 +14,7 @@ This project was built with the JavaScript Framework React.
 * npm start
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser
 
 ## Main Project requirements
 ### Application Functionality
@@ -24,6 +24,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 * Proper Use of React Components
 
 ### Usability & Interface
-* All application components render on-screen in a responsive manner.
-* All application components are usable across modern desktop, tablet, and phone browsers.
+* All application components render on-screen in a responsive manner
+* All application components are usable across modern desktop, tablet, and phone browsers
 * Accessibility (ARIA, Focus)
